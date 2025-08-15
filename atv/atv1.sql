@@ -38,4 +38,10 @@ from itensvnda i
 inner join produto p on i.codproduto = p.codproduto
 
 --7: Selecionar o nome do cliente e a descrição dos produtos comprados por ele. Não repetir os dados (distinct)
+select distinct c.cliente, p.descricaoproduto
+from cliente c
+inner join venda v on c.codcliente = v.codcliente
+inner join itensvenda i on v.nnf = i.nnf
+inner join produto p on i.codproduto = p.codproduto
 
+--8
