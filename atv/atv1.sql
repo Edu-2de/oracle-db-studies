@@ -33,3 +33,6 @@ inner join itensvenda i on v.nnf = i.nnf
 inner join produto p on i.codproduto = p.codproduto
 
 --6: Selecionar a média de preço dos produtos vendidos
+select avg(p.preco)
+from itensvnda i
+inner join produto p on i.codproduto = p.codproduto
