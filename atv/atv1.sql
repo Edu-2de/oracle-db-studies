@@ -51,3 +51,7 @@ inner join tipospagamento t on v.codtppagamento = t.codtppagamento
 order by t.descricaopagamento
 
 --9: Selecionar a data da venda e a média da quantidade de produtos vendidos. Ordenar pela data da venda decrescente
+select v.dtvenda, avg(i.qtde)
+from venda v 
+inner join itensvenda i on v.nnf = i.nnf
+order by v.dtvenda desc
