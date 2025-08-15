@@ -55,3 +55,5 @@ select v.dtvenda, avg(i.qtde)
 from venda v 
 inner join itensvenda i on v.nnf = i.nnf
 order by v.dtvenda desc
+
+--10: Selecionar a descrição do produto e a média de quantidades vendidas do produto. Somente se a média for superior a 4
