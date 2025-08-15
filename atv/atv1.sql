@@ -26,4 +26,10 @@ inner join venda v on v.codcliente = c.codcliente
 inner join tipospagamento t on v.codtppagamento = t.codtppagamento
 group by c.cliente, t.descricaopagamento
 
---5
+--5: Selecionar o nome do cliente, nnf, data da venda, descrição do tipo de pagamento,descrição do produto e quantidade vendida dos itens vendidos.
+select c.cliente, i.nnf, i.dtvenda, t.descricaotppagamento, p.descricaoproduto, i.qtde
+from cliente c
+inner join venda v on c.codcliente = v.codcliente
+inner join tipospagamento t on v.codtppagamento = t.codtppagamento
+inner join itensvenda i on v.nnf = i.nnf
+inner join produto p on i.codproduto = p.codproduto
