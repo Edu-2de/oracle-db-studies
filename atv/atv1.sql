@@ -19,5 +19,5 @@ group by c.cliente
 --3: Selecionar a descrição e o maior preço de produto vendido.
 select p.descricaoproduto, max(p.preco) from produto p
 
---4: 
+--4: Selecionar o nome do cliente e descrição do tipo de pagamento utilizado nas vendas.
 
