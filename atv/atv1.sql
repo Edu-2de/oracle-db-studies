@@ -48,3 +48,5 @@ inner join produto p on i.codproduto = p.codproduto
 select t.descricaopagamento, max(v.dtvenda)
 from venda v
 inner join tipospagamento t on v.codtppagamento = t.codtppagamento
+
+--9: Selecionar a data da venda e a média da quantidade de produtos vendidos. Ordenar pela data da venda decrescente
