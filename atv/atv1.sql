@@ -20,4 +20,10 @@ group by c.cliente
 select p.descricaoproduto, max(p.preco) from produto p
 
 --4: Selecionar o nome do cliente e descrição do tipo de pagamento utilizado nas vendas.
+select c.cliente, t.descricaopagamento
+from cliente c
+inner join venda v on v.codcliente = c.codcliente
+inner join tipospagamento t on v.codtppagamento = t.codtppagamento
+group by c.cliente, t.descricaopagamento
 
+--5
