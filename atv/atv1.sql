@@ -4,7 +4,7 @@
 select c.cliente, i.qtde
 from cliente c
 inner join venda v on c.codcliente = v.codcliente
-inner join itensvenda i on v.nnf = i.nnf
+inner join itensvenda i on v.nnf = i.nnf and v.dtvenda = i.dtvenda
 inner join produto p on i.codproduto = p.codproduto
 where p.descricaoproduto = 'Coca Cola'
 
