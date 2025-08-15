@@ -44,4 +44,4 @@ inner join venda v on c.codcliente = v.codcliente
 inner join itensvenda i on v.nnf = i.nnf
 inner join produto p on i.codproduto = p.codproduto
 
---8
+--8: Selecionar a descrição do tipo de pagamento, e a maior data de venda que utilizou esse tipo de pagamento. Ordenar a consulta pela descrição do tipo de pagamento.
