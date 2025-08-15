@@ -36,3 +36,6 @@ inner join produto p on i.codproduto = p.codproduto
 select avg(p.preco)
 from itensvnda i
 inner join produto p on i.codproduto = p.codproduto
+
+--7: Selecionar o nome do cliente e a descrição dos produtos comprados por ele. Não repetir os dados (distinct)
+
