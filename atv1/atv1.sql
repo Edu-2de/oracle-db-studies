@@ -53,7 +53,8 @@ group by t.descricaotppagamento
 --9: Selecionar a data da venda e a média da quantidade de produtos vendidos. Ordenar pela data da venda decrescente
 select v.dtvenda, avg(i.qtde)
 from venda v 
-inner join itensvenda i on v.nnf = i.nnf
+inner join itensvenda i on v.nnf = i.nnf and v.dtvenda = i.dtvenda
+group by v.dtvenda
 order by v.dtvenda desc
 
 --10: Selecionar a descrição do produto e a média de quantidades vendidas do produto. Somente se a média for superior a 4
