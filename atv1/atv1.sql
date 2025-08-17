@@ -33,9 +33,9 @@ inner join itensvenda i on v.nnf = i.nnf
 inner join produto p on i.codproduto = p.codproduto
 
 --6: Selecionar a média de preço dos produtos vendidos
-select avg(p.preco)
-from itensvnda i
-inner join produto p on i.codproduto = p.codproduto
+SELECT ROUND(SUM(i.qtde * p.preco) / SUM(i.qtde), 3)
+FROM itensvenda i
+INNER JOIN produto p ON i.codproduto = p.codproduto;
 
 --7: Selecionar o nome do cliente e a descrição dos produtos comprados por ele. Não repetir os dados (distinct)
 select distinct c.cliente, p.descricaoproduto
