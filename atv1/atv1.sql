@@ -58,3 +58,13 @@ group by v.dtvenda
 order by v.dtvenda desc
 
 --10: Selecionar a descrição do produto e a média de quantidades vendidas do produto. Somente se a média for superior a 4
+SELECT
+  p.descricaoproduto,
+  ROUND(AVG(i.qtde), 2) AS media_qtde
+FROM
+  itensvenda i
+  INNER JOIN produto p ON i.codproduto = p.codproduto
+GROUP BY
+  p.descricaoproduto
+HAVING
+  AVG(i.qtde) > 4;
