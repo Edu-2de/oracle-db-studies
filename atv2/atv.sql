@@ -10,4 +10,7 @@ SET salario = salario * 1.10;
 SELECT c.Curso, a.Analista, a.Salario FROM vw_cursosanalista a
 JOIN curso c ON a.Codcurso = c.Codcurso;
 
---2
+--2: Montar uma consulta que mostra o nome do programador e a quantidade de dias de férias. Caso o programador tenha idade
+--de 20 a 24 anos 18 dias
+--de 25 a 35 anos 21 dias
+--acima de 35 anos 25 dias
