@@ -31,3 +31,8 @@ SELECT Analista, codanalista FROM analista;
 SELECT a.Analista,  COUNT(*) AS total_atividades FROM vw_ativanalista a
 JOIN atividadesanalise aa ON a.codanalista = aa.codanalista
 GROUP BY a.Analista;
+
+--4: Montar uma consulta para atualizar o salário dos analistas a partir da quantidade de atividades de análise realizadas.
+--1 atividade 5%
+--2 atividades 10%
+--3 atividades ou mais 15%
