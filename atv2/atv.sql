@@ -57,3 +57,5 @@ SET salario = salario *
     ) >= 3 THEN 1.15
     ELSE 1
   END;
+
+--5:  Monte uma consulta para mostrar o nome do(s) analista(s) e o nome de seu respectivo curso, o(s) qual(is) nunca tive(ram) atividades realizadas com o programador o qual tenha em seu nome a palavra “Jefer”.
