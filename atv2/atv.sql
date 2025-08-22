@@ -59,3 +59,17 @@ SET salario = salario *
   END;
 
 --5:  Monte uma consulta para mostrar o nome do(s) analista(s) e o nome de seu respectivo curso, o(s) qual(is) nunca tive(ram) atividades realizadas com o programador o qual tenha em seu nome a palavra “Jefer”.
+
+SELECT a.analista, c.curso
+FROM analista a
+INNER JOIN curso c ON a.codcurso = c.codcurso
+
+MINUS
+
+SELECT a.analista, c.curso
+FROM analista a
+INNER JOIN curso c ON a.codcurso = c.codcurso
+INNER JOIN atividadesanalise aa ON a.codanalista = aa.codanalista
+INNER JOIN atividadesprog ap ON aa.codatividadeanalise = ap.codatividadeanalise
+INNER JOIN programador p ON ap.codprogramador = p.codprogramador
+WHERE p.programador LIKE '%Jefer%'
