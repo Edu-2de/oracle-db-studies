@@ -24,3 +24,10 @@ SELECT Programador,
 FROM programador;
 
 --3: Criar uma view com o nome de ativanalista, contendo o nome do analista e a quantidade de atividades de análise que ele realizou.
+
+CREATE OR REPLACE VIEW vw_ativanalista AS 
+SELECT Analista, codanalista FROM analista;
+
+SELECT a.Analista,  COUNT(*) AS total_atividades FROM vw_ativanalista a
+JOIN atividadesanalise aa ON a.codanalista = aa.codanalista
+GROUP BY a.Analista;
