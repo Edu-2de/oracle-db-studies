@@ -1,3 +1,4 @@
+// cSpell:disable
 insert into curso values ('1','Oracle 8i', '360', TO_DATE('2009-03-01','YYYY-MM-DD'));
 insert into curso values ('2','Delphi', '300', TO_DATE('2009-05-30','YYYY-MM-DD'));
 insert into curso values ('3','Windows 98', '20', TO_DATE('2009-04-28','YYYY-MM-DD'));

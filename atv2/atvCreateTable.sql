@@ -1,3 +1,4 @@
+// cSpell:disable
 create table curso (codcurso int PRIMARY KEY, curso varchar(50), duracao int, dtcurso
 date);
 create table analista (codanalista int PRIMARY KEY, analista varchar(50), idade int, endereco
