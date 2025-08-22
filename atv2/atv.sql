@@ -14,3 +14,11 @@ JOIN curso c ON a.Codcurso = c.Codcurso;
 --de 20 a 24 anos 18 dias
 --de 25 a 35 anos 21 dias
 --acima de 35 anos 25 dias
+
+SELECT Programador,
+  CASE
+    WHEN Idade >= 20 AND Idade <= 24 THEN '18 dias'
+    WHEN Idade >= 25 AND Idade <= 35 THEN '21 dias'
+    WHEN Idade > 35 THEN '25 dias'
+  END AS ferias
+FROM programador;
