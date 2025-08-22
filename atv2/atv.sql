@@ -36,3 +36,24 @@ GROUP BY a.Analista;
 --1 atividade 5%
 --2 atividades 10%
 --3 atividades ou mais 15%
+
+UPDATE analista
+SET salario = salario *
+  CASE
+    WHEN (
+      SELECT COUNT(*) 
+      FROM atividadesanalise aa
+      WHERE aa.codanalista = analista.codanalista
+    ) = 1 THEN 1.05
+    WHEN (
+      SELECT COUNT(*) 
+      FROM atividadesanalise aa
+      WHERE aa.codanalista = analista.codanalista
+    ) = 2 THEN 1.10
+    WHEN (
+      SELECT COUNT(*) 
+      FROM atividadesanalise aa
+      WHERE aa.codanalista = analista.codanalista
+    ) >= 3 THEN 1.15
+    ELSE 1
+  END;
