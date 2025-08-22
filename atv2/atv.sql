@@ -22,3 +22,5 @@ SELECT Programador,
     WHEN Idade > 35 THEN '25 dias'
   END AS ferias
 FROM programador;
+
+--3: Criar uma view com o nome de ativanalista, contendo o nome do analista e a quantidade de atividades de análise que ele realizou.
