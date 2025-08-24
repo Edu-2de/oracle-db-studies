@@ -43,3 +43,5 @@ CREATE TABLE itensvenda (
     FOREIGN KEY (nnf, dtvenda) REFERENCES venda (nnf, dtvenda),
     FOREIGN KEY (codproduto) REFERENCES produto (codproduto)
 );
+
+//primeira atividade feita no oracle apex
