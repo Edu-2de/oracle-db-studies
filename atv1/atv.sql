@@ -1,4 +1,5 @@
 // cSpell:disable
+// primeira atividade feita no oracle apex
 
 --1: Selecionar o nome do cliente e quantidade de produtos comprados, somente para clientes que compraram Coca Cola
 select c.cliente, i.qtde
