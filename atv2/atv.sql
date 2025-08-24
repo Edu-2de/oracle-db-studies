@@ -1,4 +1,6 @@
 // cSpell:disable
+// segunda atividade feita pelo oracle apex
+
 --1: Criar uma view com o nome de cursosanalista, que contém o nome do curso, nome do analista e salário do analista com um aumento de 10%.
 
 CREATE OR REPLACE VIEW vw_cursosanalista AS
