@@ -1,5 +1,5 @@
 // cSpell:disable
-// segunda atividade feita pelo oracle apex
+// terceira atividade feita pelo oracle apex
 
 --1: Criar uma view com o nome de cursosanalista, que contém o nome do curso, nome do analista e salário do analista com um aumento de 10%.
 
