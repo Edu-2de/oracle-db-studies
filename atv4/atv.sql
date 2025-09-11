@@ -76,3 +76,26 @@ END;
 
 
 --4 Criar uma procedure media_produto: Esta procedure recebe como parâmetro duas datas, uma de início e uma de fim e deve retornar o valor médio dos produtos vendidos no período e a soma das quantidades de produto vendido no período.
+CREATE OR REPLACE PROCEDURE media_produto(
+    i_dtinicio IN DATE,
+    i_dtfim IN DATE,
+    p_media OUT FLOAT,
+    p_qtde OUT FLOAT
+)
+IS 
+    BEGIN
+    SELECT NVL(AVG(p.preco), 0), NVL(SUM(i.qtde), 0)
+    INTO p_media, p_qtde
+    FROM XPRODUTO p
+    INNER JOIN XITENSVENDA i ON p.CODPRODUTO = i.CODPRODUTO
+    WHERE i.DTVENDA >= i_dtinicio AND i.DTVENDA <= i_dtfim;
+END;
+
+
+DECLARE
+    v_media FLOAT;
+    v_qtde FLOAT;
+BEGIN
+    media_produto(TO_DATE('20/04/2002', 'DD/MM/YYYY'), TO_DATE('25/04/2002', 'DD/MM/YYYY'), v_media, v_qtde);
+    DBMS_OUTPUT.PUT_LINE('A média do valor dos produtos foi: ' || v_media || ' e a quantidade de produtos vendidos foi: ' || v_qtde);
+END;
