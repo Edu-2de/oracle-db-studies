@@ -1,77 +1,71 @@
 // cSpell:disable
-// segunda atividade feita pelo oracle apex
+// primeira atividade feita no oracle apex
 
---1: Criar uma view com o nome de cursosanalista, que contém o nome do curso, nome do analista e salário do analista com um aumento de 10%.
+--1: Selecionar o nome do cliente e quantidade de produtos comprados, somente para clientes que compraram Coca Cola
+select c.cliente, i.qtde
+from cliente c
+inner join venda v on c.codcliente = v.codcliente
+inner join itensvenda i on v.nnf = i.nnf and v.dtvenda = i.dtvenda
+inner join produto p on i.codproduto = p.codproduto
+where p.descricaoproduto = 'Coca Cola'
 
-CREATE OR REPLACE VIEW vw_cursosanalista AS
-SELECT Analista, salario, Codcurso FROM analista
+--2: Selecionar o nome do cliente e o valor total comprado por ele.
+select c.cliente, sum(v.vlvenda) as sum
+from cliente c
+inner join venda v on c.codcliente = v.codcliente
+GROUP BY c.cliente
 
-UPDATE analista
-SET salario = salario * 1.10;
+--3: Selecionar a descrição e o maior preço de produto vendido.
+select p.descricaoproduto, max(p.preco) from produto p
+GROUP BY p.descricaoproduto
 
-SELECT c.Curso, a.Analista, a.Salario FROM vw_cursosanalista a
-JOIN curso c ON a.Codcurso = c.Codcursol;
+--4: Selecionar o nome do cliente e descrição do tipo de pagamento utilizado nas vendas.
+select c.cliente, t.descricaotppagamento
+from cliente c
+inner join venda v on v.codcliente = c.codcliente
+inner join tipospagamento t on v.codtppagamento = t.codtppagamento
 
---2: Montar uma consulta que mostra o nome do programador e a quantidade de dias de férias. Caso o programador tenha idade
---de 20 a 24 anos 18 dias
---de 25 a 35 anos 21 dias
---acima de 35 anos 25 dias
+--5: Selecionar o nome do cliente, nnf, data da venda, descrição do tipo de pagamento,descrição do produto e quantidade vendida dos itens vendidos.
+select c.cliente, i.nnf, i.dtvenda, t.descricaotppagamento, p.descricaoproduto, i.qtde
+from cliente c
+inner join venda v on c.codcliente = v.codcliente
+inner join tipospagamento t on v.codtppagamento = t.codtppagamento
+inner join itensvenda i on v.nnf = i.nnf
+inner join produto p on i.codproduto = p.codproduto
 
-SELECT Programador,
-  CASE
-    WHEN Idade >= 20 AND Idade <= 24 THEN '18 dias'
-    WHEN Idade >= 25 AND Idade <= 35 THEN '21 dias'
-    WHEN Idade > 35 THEN '25 dias'
-  END AS ferias
-FROM programador;
+--6: Selecionar a média de preço dos produtos vendidos
+SELECT ROUND(SUM(i.qtde * p.preco) / SUM(i.qtde), 3)
+FROM itensvenda i
+INNER JOIN produto p ON i.codproduto = p.codproduto;
 
---3: Criar uma view com o nome de ativanalista, contendo o nome do analista e a quantidade de atividades de análise que ele realizou.
+--7: Selecionar o nome do cliente e a descrição dos produtos comprados por ele. Não repetir os dados (distinct)
+select distinct c.cliente, p.descricaoproduto
+from cliente c
+inner join venda v on c.codcliente = v.codcliente
+inner join itensvenda i on v.nnf = i.nnf and v.dtvenda = i.dtvenda
+inner join produto p on i.codproduto = p.codproduto
 
-CREATE OR REPLACE VIEW vw_ativanalista AS 
-SELECT Analista, codanalista FROM analista;
+--8: Selecionar a descrição do tipo de pagamento, e a maior data de venda que utilizou esse tipo de pagamento. Ordenar a consulta pela descrição do tipo de pagamento.
+select t.descricaotppagamento, max(v.dtvenda)
+from venda v
+inner join tipospagamento t on v.codtppagamento = t.codtppagamento
+group by t.descricaotppagamento
 
-SELECT a.Analista,  COUNT(*) AS total_atividades FROM vw_ativanalista a
-JOIN atividadesanalise aa ON a.codanalista = aa.codanalista
-GROUP BY a.Analista;
+--9: Selecionar a data da venda e a média da quantidade de produtos vendidos. Ordenar pela data da venda decrescente
+select v.dtvenda, avg(i.qtde)
+from venda v 
+inner join itensvenda i on v.nnf = i.nnf and v.dtvenda = i.dtvenda
+group by v.dtvenda
+order by v.dtvenda desc
 
---4: Montar uma consulta para atualizar o salário dos analistas a partir da quantidade de atividades de análise realizadas.
---1 atividade 5%
---2 atividades 10%
---3 atividades ou mais 15%
-
-UPDATE analista
-SET salario = salario *
-  CASE
-    WHEN (
-      SELECT COUNT(*) 
-      FROM atividadesanalise aa
-      WHERE aa.codanalista = analista.codanalista
-    ) = 1 THEN 1.05
-    WHEN (
-      SELECT COUNT(*) 
-      FROM atividadesanalise aa
-      WHERE aa.codanalista = analista.codanalista
-    ) = 2 THEN 1.10
-    WHEN (
-      SELECT COUNT(*) 
-      FROM atividadesanalise aa
-      WHERE aa.codanalista = analista.codanalista
-    ) >= 3 THEN 1.15
-    ELSE 1
-  END;
-
---5:  Monte uma consulta para mostrar o nome do(s) analista(s) e o nome de seu respectivo curso, o(s) qual(is) nunca tive(ram) atividades realizadas com o programador o qual tenha em seu nome a palavra “Jefer”.
-
-SELECT a.analista, c.curso
-FROM analista a
-INNER JOIN curso c ON a.codcurso = c.codcurso
-
-MINUS
-
-SELECT a.analista, c.curso
-FROM analista a
-INNER JOIN curso c ON a.codcurso = c.codcurso
-INNER JOIN atividadesanalise aa ON a.codanalista = aa.codanalista
-INNER JOIN atividadesprog ap ON aa.codatividadeanalise = ap.codatividadeanalise
-INNER JOIN programador p ON ap.codprogramador = p.codprogramador
-WHERE p.programador LIKE '%Jefer%';
+--10: Selecionar a descrição do produto e a média de quantidades vendidas do produto. Somente se a média for superior a 4
+SELECT
+  p.descricaoproduto,
+  ROUND(AVG(i.qtde), 2) AS media_qtde
+FROM
+  itensvenda i
+  INNER JOIN produto p ON i.codproduto = p.codproduto
+GROUP BY
+  p.descricaoproduto
+HAVING
+  AVG(i.qtde) > 4;

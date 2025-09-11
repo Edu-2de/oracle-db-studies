@@ -1,30 +1,33 @@
 // cSpell:disable
-insert into curso values ('1','Oracle 8i', '360', TO_DATE('2009-03-01','YYYY-MM-DD'));
-insert into curso values ('2','Delphi', '300', TO_DATE('2009-05-30','YYYY-MM-DD'));
-insert into curso values ('3','Windows 98', '20', TO_DATE('2009-04-28','YYYY-MM-DD'));
-insert into curso values ('4','linux', '35', TO_DATE('2009-06-06','YYYY-MM-DD'));
-insert into curso values ('5','Visual Basic', '120', TO_DATE('2009-04-28','YYYY-MM-DD'));
-insert into curso values ('6','Office', '15', TO_DATE('2009-05-30','YYYY-MM-DD'));
 
-insert into analista values ('1','Joao', '20','Av. Carlso Gomes, 200', '1','2300');
-insert into analista values ('2','Joice', '24','Av independencia,10', '1','2245');
-insert into analista values ('3','Pedro', '32','Av Carlos Gomes,100', '2','2145');
-insert into analista values ('4','Maria', '28','Dom Pedro II,10', '6','1890');
-insert into analista values ('5','Rafael', '29','Av Nilo Peçanha,40', '2','2800');
+INSERT INTO produto (codproduto, descricaoproduto, unidade, preco) VALUES (1, 'Coca Cola', 'lt', 1.20);
+INSERT INTO produto (codproduto, descricaoproduto, unidade, preco) VALUES (2, 'Presunto Sadia', 'kg', 5.40);
+INSERT INTO produto (codproduto, descricaoproduto, unidade, preco) VALUES (3, 'Sabonete Palmolive', 'Un', 0.65);
+INSERT INTO produto (codproduto, descricaoproduto, unidade, preco) VALUES (4, 'Shampoo Colorama', 'Un', 2.60);
+INSERT INTO produto (codproduto, descricaoproduto, unidade, preco) VALUES (5, 'Cerveja Skol', 'Gf', 0.99);
 
-insert into programador values ('10','Jeferson', '34','Av Ipiranga,10','1000');
-insert into programador values ('20','Andrea', '25','Souza Reis,200', '1200');
-insert into programador values ('30','Ana Paula', '23','Av. Carlos Gomes,100', '1450');
-insert into programador values ('40','Fernando', '20','Av. Ipiranga,20', '1600');
-insert into programador values ('50','Susana', '40','Av. Assis Brasil,200', '1180');
 
-insert into atividadesanalise values ('10', TO_DATE('2009-01-01','YYYY-MM-DD'), TO_DATE('2009-01-30','YYYY-MM-DD'), 'Processo de venda', '2');
-insert into atividadesanalise values ('20', TO_DATE('2009-02-03','YYYY-MM-DD'), TO_DATE('2009-02-28','YYYY-MM-DD'), 'Pedido de compra', '2');
-insert into atividadesanalise values ('30', TO_DATE('2009-04-05','YYYY-MM-DD'), TO_DATE('2009-06-20','YYYY-MM-DD'), 'Cadastro fornecedor', '1');
-insert into atividadesanalise values ('40', TO_DATE('2009-06-06','YYYY-MM-DD'), TO_DATE('2009-07-30','YYYY-MM-DD'), 'Cadastro Produto', '4');
+INSERT INTO cliente (codcliente, cliente, cpf, endereco) VALUES (1, 'João da Silva', '123456789', 'Rua Andradas, 250');
+INSERT INTO cliente (codcliente, cliente, cpf, endereco) VALUES (2, 'Maria do Rosário', '26547899', 'Rua Lima e Silva, 648');
+INSERT INTO cliente (codcliente, cliente, cpf, endereco) VALUES (3, 'Paulo Silveira', '8963254', 'Rua Plínio Brasil Milano, 980');
+INSERT INTO cliente (codcliente, cliente, cpf, endereco) VALUES (4, 'Rosa Aparecida dos Santos', '5896332123', 'Av. Ipiranga, 8960');
 
-insert into atividadesprog values ('100', TO_DATE('2009-01-05','YYYY-MM-DD'), TO_DATE('2009-01-07','YYYY-MM-DD'), 'tela 105', '10', '10');
-insert into atividadesprog values ('101', TO_DATE('2009-02-05','YYYY-MM-DD'), TO_DATE('2009-02-28','YYYY-MM-DD'), 'Relatorio 12', '10', '20');
-insert into atividadesprog values ('102', TO_DATE('2009-02-05','YYYY-MM-DD'), TO_DATE('2009-02-15','YYYY-MM-DD'), 'Procedure', '20', '20');
-insert into atividadesprog values ('103', TO_DATE('2009-04-06','YYYY-MM-DD'), TO_DATE('2009-04-10','YYYY-MM-DD'), 'tela 165', '10', '30');
-insert into atividadesprog values ('104', TO_DATE('2009-06-09','YYYY-MM-DD'), TO_DATE('2009-06-15','YYYY-MM-DD'), 'Relatorio 16', '30', '30');
+
+INSERT INTO tipospagamento (codtppagamento, descricaotppagamento) VALUES (1, 'Cheque');
+INSERT INTO tipospagamento (codtppagamento, descricaotppagamento) VALUES (2, 'Dinheiro');
+INSERT INTO tipospagamento (codtppagamento, descricaotppagamento) VALUES (3, 'Crediário');
+
+
+INSERT INTO venda (nnf, dtvenda, codcliente, codtppagamento, vlvenda) VALUES (1, TO_DATE('20/04/2002', 'DD/MM/YYYY'), 1, 1, 15.00);
+INSERT INTO venda (nnf, dtvenda, codcliente, codtppagamento, vlvenda) VALUES (2, TO_DATE('20/04/2002', 'DD/MM/YYYY'), 2, 1, 7.50);
+INSERT INTO venda (nnf, dtvenda, codcliente, codtppagamento, vlvenda) VALUES (1, TO_DATE('25/04/2002', 'DD/MM/YYYY'), 3, 2, 7.90);
+INSERT INTO venda (nnf, dtvenda, codcliente, codtppagamento, vlvenda) VALUES (1, TO_DATE('30/04/2002', 'DD/MM/YYYY'), 3, 2, 8.50);
+
+
+INSERT INTO itensvenda (nnf, dtvenda, codproduto, qtde) VALUES (1, TO_DATE('20/04/2002', 'DD/MM/YYYY'), 1, 1);
+INSERT INTO itensvenda (nnf, dtvenda, codproduto, qtde) VALUES (1, TO_DATE('20/04/2002', 'DD/MM/YYYY'), 2, 2);
+INSERT INTO itensvenda (nnf, dtvenda, codproduto, qtde) VALUES (2, TO_DATE('20/04/2002', 'DD/MM/YYYY'), 1, 3);
+INSERT INTO itensvenda (nnf, dtvenda, codproduto, qtde) VALUES (2, TO_DATE('20/04/2002', 'DD/MM/YYYY'), 2, 2);
+INSERT INTO itensvenda (nnf, dtvenda, codproduto, qtde) VALUES (2, TO_DATE('20/04/2002', 'DD/MM/YYYY'), 4, 4);
+INSERT INTO itensvenda (nnf, dtvenda, codproduto, qtde) VALUES (1, TO_DATE('25/04/2002', 'DD/MM/YYYY'), 3, 9);
+INSERT INTO itensvenda (nnf, dtvenda, codproduto, qtde) VALUES (1, TO_DATE('30/04/2002', 'DD/MM/YYYY'), 3, 7);
