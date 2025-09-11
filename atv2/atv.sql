@@ -74,4 +74,4 @@ INNER JOIN curso c ON a.codcurso = c.codcurso
 INNER JOIN atividadesanalise aa ON a.codanalista = aa.codanalista
 INNER JOIN atividadesprog ap ON aa.codatividadeanalise = ap.codatividadeanalise
 INNER JOIN programador p ON ap.codprogramador = p.codprogramador
-WHERE p.programador LIKE '%Jefer%'
+WHERE p.programador LIKE '%Jefer%';
