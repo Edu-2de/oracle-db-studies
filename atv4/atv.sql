@@ -18,6 +18,7 @@ from xproduto;
 
 
 
+
 --2 Criar a função percdesconto, que recebe como parâmetro o código do cliente e deve retornar o percentual de desconto conforme a tabela abaixo:
 
 CREATE OR REPLACE FUNCTION percdesconto (c_codcliente IN INT) RETURN VARCHAR2
@@ -44,4 +45,29 @@ END;
 
 SELECT percdesconto(1) FROM dual;
 
+
+
+
 --3 Criar uma procedure media_vendas: Esta procedure recebe como parâmetro o código do cliente e deve retornar o valor médio das vendas do cliente e a quantidade de vendas do cliente.
+
+CREATE OR REPLACE PROCEDURE media_vendas (
+    c_codcliente IN INT,
+    p_media OUT FLOAT,
+    p_quantid OUT INT
+)
+IS
+BEGIN
+    SELECT AVG(v.vlvenda), COUNT(*)
+    INTO p_media, p_quantid
+    FROM xvenda v
+    WHERE v.codcliente = c_codcliente;
+END;
+
+
+DECLARE
+    v_media FLOAT;
+    v_quantid INT;
+BEGIN
+    media_vendas(3, v_media, v_quantid);
+    DBMS_OUTPUT.PUT_LINE('A média de valor de venda do cliente é: ' || v_media || ' e a quantidade de vendas dele foi: ' || v_quantid);
+END;
