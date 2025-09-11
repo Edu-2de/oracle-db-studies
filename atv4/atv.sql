@@ -71,3 +71,8 @@ BEGIN
     media_vendas(3, v_media, v_quantid);
     DBMS_OUTPUT.PUT_LINE('A média de valor de venda do cliente é: ' || v_media || ' e a quantidade de vendas dele foi: ' || v_quantid);
 END;
+
+
+
+
+--4 Criar uma procedure media_produto: Esta procedure recebe como parâmetro duas datas, uma de início e uma de fim e deve retornar o valor médio dos produtos vendidos no período e a soma das quantidades de produto vendido no período.
