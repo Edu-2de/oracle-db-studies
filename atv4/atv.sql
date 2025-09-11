@@ -99,3 +99,25 @@ BEGIN
     media_produto(TO_DATE('20/04/2002', 'DD/MM/YYYY'), TO_DATE('25/04/2002', 'DD/MM/YYYY'), v_media, v_qtde);
     DBMS_OUTPUT.PUT_LINE('A média do valor dos produtos foi: ' || v_media || ' e a quantidade de produtos vendidos foi: ' || v_qtde);
 END;
+
+
+--5 Criar uma procedure max_vltipopagto: Esta procedure recebe como parâmetro a descrição do tipo de pagamento e retorna o maior valor vendido para o tipo de pagamento informado no parâmetro
+CREATE OR REPLACE PROCEDURE max_vltipopagto(
+    t_tipo IN VARCHAR2,
+    t_maxvl OUT FLOAT
+)
+IS
+BEGIN 
+    SELECT MAX(v.VLVENDA)
+    INTO t_maxvl 
+    FROM XVENDA v, XTIPOSPAGAMENTO t
+    WHERE v.CODTPPAGAMENTO = t.CODTPPAGAMENTO
+      AND t.DESCRICAOTPPAGAMENTO = t_tipo;
+END;
+
+DECLARE 
+    v_maxvl FLOAT;
+BEGIN
+    max_vltipopagto('Cheque', v_maxvl);
+    DBMS_OUTPUT.PUT_LINE('Maior valor de venda pelo método ' || 'Cheque' || ': ' || v_maxvl);
+END;
