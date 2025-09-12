@@ -140,21 +140,33 @@ SELECT retorna_mediageral FROM dual;
 
 
 --7 Criar a função retorna_novo_preco, que recebe como parâmetro a descrição do produto e mediante a quantidade vendida retorna o novo preço do produto, conforme a tabela abaixo: Qtd vendida % Aumento 1 5 2 7 3 8 4 9 maior ou igual a 5 12
-CREATE OR REPLACE FUNCTION retorna_novo_preco (p_descricao IN VARCHAR(20)) RETURN VARCHAR2
+CREATE OR REPLACE FUNCTION retorna_novo_preco (p_descricao IN VARCHAR2) RETURN VARCHAR2
 IS
     it_qtdesvendidas FLOAT;
+    v_preco FLOAT;
     p_novopreco FLOAT;
 BEGIN
-    SELECT SUM(i.qtde) INTO it_qtdesvendidas
-    FROM XITENSVENDA i
-    INNER JOIN XPRODUTO p ON i.codproduto = p.codproduto
-    WHERE p.descricaoproduto = p_descricao
-    
+    SELECT NVL(SUM(i.qtde), 0), p.preco
+    INTO it_qtdesvendidas, v_preco
+    FROM XITENSVENDA i, XPRODUTO p
+    WHERE i.codproduto = p.codproduto
+      AND p.descricaoproduto = p_descricao;
+
     IF it_qtdesvendidas = 1 THEN
-        p_novopreco := p.novopreco + (p.novopreco*1.05)
+        p_novopreco := v_preco + (v_preco * 0.05);
     ELSIF it_qtdesvendidas = 2 THEN
-        p_novopreco := p.novopreco + (p.novopreco*1.07)
+        p_novopreco := v_preco + (v_preco * 0.07);
+    ELSIF it_qtdesvendidas = 3 THEN
+        p_novopreco := v_preco + (v_preco * 0.08);
     ELSIF it_qtdesvendidas = 4 THEN
-        p_novopreco := p.novopreco + (p.novopreco*1.08)
-    ELSIF it_qtdesvendidas = 4 THEN
-        p_novopreco := p.novopreco + (p.novopreco*1.08)
+        p_novopreco := v_preco + (v_preco * 0.09);
+    ELSIF it_qtdesvendidas >= 5 THEN
+        p_novopreco := v_preco + (v_preco * 0.12);
+    ELSE
+        p_novopreco := v_preco; 
+    END IF;
+
+    RETURN 'O novo preco do produto é: ' || TO_CHAR(p_novopreco, 'FM9999990.00');
+END;
+
+SELECT retorna_novo_preco('Coca Cola') FROM dual;
