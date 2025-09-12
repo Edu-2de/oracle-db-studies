@@ -135,3 +135,8 @@ BEGIN
 END;
 
 SELECT retorna_mediageral FROM dual;
+
+
+
+
+--7 Criar a função retorna_novo_preco, que recebe como parâmetro a descrição do produto e mediante a quantidade vendida retorna o novo preço do produto, conforme a tabela abaixo: Qtd vendida % Aumento 1 5 2 7 3 8 4 9 maior ou igual a 5 12
