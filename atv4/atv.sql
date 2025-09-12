@@ -2,7 +2,6 @@
 // quarta atividade feita pelo oracle apex
 
 --1 Criar uma procedure Aumenta_Produto: Esta procedure recebe como parâmetro o percentual de aumento dos produtos. Essa procedure deve atualizar os preços dos produtos no percentual informado.
-
 CREATE OR REPLACE PROCEDURE Aumenta_Produto (valor in float) return float
 IS
 BEGIN
@@ -20,7 +19,6 @@ from xproduto;
 
 
 --2 Criar a função percdesconto, que recebe como parâmetro o código do cliente e deve retornar o percentual de desconto conforme a tabela abaixo:
-
 CREATE OR REPLACE FUNCTION percdesconto (c_codcliente IN INT) RETURN VARCHAR2
 IS
     desconto FLOAT;
@@ -49,7 +47,6 @@ SELECT percdesconto(1) FROM dual;
 
 
 --3 Criar uma procedure media_vendas: Esta procedure recebe como parâmetro o código do cliente e deve retornar o valor médio das vendas do cliente e a quantidade de vendas do cliente.
-
 CREATE OR REPLACE PROCEDURE media_vendas (
     c_codcliente IN INT,
     p_media OUT FLOAT,
@@ -123,6 +120,9 @@ BEGIN
     max_vltipopagto('Cheque', v_maxvl);
     DBMS_OUTPUT.PUT_LINE('Maior valor de venda pelo método ' || 'Cheque' || ': ' || v_maxvl);
 END;
+
+
+
 
 --6 Criar a função retorna_mediageral que retorna a média geral das vendas. 
 CREATE OR REPLACE FUNCTION retorna_mediageral RETURN VARCHAR2
