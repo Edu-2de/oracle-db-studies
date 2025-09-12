@@ -123,3 +123,5 @@ BEGIN
     max_vltipopagto('Cheque', v_maxvl);
     DBMS_OUTPUT.PUT_LINE('Maior valor de venda pelo método ' || 'Cheque' || ': ' || v_maxvl);
 END;
+
+--6 Criar a função retorna_mediageral que retorna a média geral das vendas. 
