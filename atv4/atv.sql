@@ -140,3 +140,21 @@ SELECT retorna_mediageral FROM dual;
 
 
 --7 Criar a função retorna_novo_preco, que recebe como parâmetro a descrição do produto e mediante a quantidade vendida retorna o novo preço do produto, conforme a tabela abaixo: Qtd vendida % Aumento 1 5 2 7 3 8 4 9 maior ou igual a 5 12
+CREATE OR REPLACE FUNCTION retorna_novo_preco (p_descricao IN VARCHAR(20)) RETURN VARCHAR2
+IS
+    it_qtdesvendidas FLOAT;
+    p_novopreco FLOAT;
+BEGIN
+    SELECT SUM(i.qtde) INTO it_qtdesvendidas
+    FROM XITENSVENDA i
+    INNER JOIN XPRODUTO p ON i.codproduto = p.codproduto
+    WHERE p.descricaoproduto = p_descricao
+    
+    IF it_qtdesvendidas = 1 THEN
+        p_novopreco := p.novopreco + (p.novopreco*1.05)
+    ELSIF it_qtdesvendidas = 2 THEN
+        p_novopreco := p.novopreco + (p.novopreco*1.07)
+    ELSIF it_qtdesvendidas = 4 THEN
+        p_novopreco := p.novopreco + (p.novopreco*1.08)
+    ELSIF it_qtdesvendidas = 4 THEN
+        p_novopreco := p.novopreco + (p.novopreco*1.08)
