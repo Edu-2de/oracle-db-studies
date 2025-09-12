@@ -125,13 +125,13 @@ BEGIN
 END;
 
 --6 Criar a função retorna_mediageral que retorna a média geral das vendas. 
-CREATE OR REPLACE FUNCTION retorna_mediageral() RETURN VARCHAR2
-    IS
-    v_mediageral FLOAT
-    BEGIN
+CREATE OR REPLACE FUNCTION retorna_mediageral RETURN VARCHAR2
+IS
+    v_mediageral FLOAT;
+BEGIN
     SELECT AVG(v.vlvenda) INTO v_mediageral
-    FROM XVENDA v
-    RETURN('A mediia geral de vendas foi: '|| v_mediageral);
+    FROM XVENDA v;
+    RETURN 'A média geral de vendas foi: ' || v_mediageral;
 END;
 
-SELECT retorna_mediageral() FROM dual;
+SELECT retorna_mediageral FROM dual;
