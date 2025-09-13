@@ -215,3 +215,12 @@ SELECT retorna_ultimavenda('Sabonete Palmolive') FROM dual;
 
 
 --10 Criar a função retorna_menorvenda que retorna o menor valor de venda realizada.
+CREATE OR REPLACE FUNCTION retorna_menorvenda RETURN FLOAT
+IS
+    min_value FLOAT;
+BEGIN
+    SELECT MIN(v.vlvenda) INTO min_value
+    FROM XVENDA v
+RETURN min_value;
+END;
+SELECT retorna_menorvenda FROM dual;
