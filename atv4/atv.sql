@@ -194,3 +194,18 @@ END;
 
 SELECT retorna_valor_pagamento('Creditário') FROM dual;
 
+
+
+
+--9 Criar a função retorna_ultimavenda que recebe como parâmetro a descrição do produto e retorna a última data que o produto foi vendido.
+CREATE OR REPLACE FUNCTION retorna_ultimavenda(p_descricao IN VARCHAR2) RETURN DATE
+IS
+    dt_ultima DATE;
+BEGIN 
+    SELECT MAX(i.dtvenda)
+    FROM XITENSVENDA i, XPRODUTO p
+    WHERE i.codproduto = p.codproduto
+    AND p.descricaoproduto = p_descricao;
+RETURN  dt_ultima;
+
+SELECT retorna_ultimavenda('Coca Cola') FROM dual;
