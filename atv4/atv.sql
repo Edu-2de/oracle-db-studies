@@ -180,3 +180,8 @@ SELECT retorna_novo_preco('Coca Cola') FROM dual;
 
 
 --8 Criar a função retorna_valor_pagamento que recebe como parâmetro a descrição do tipo de pagamento e retorna a quantidade de clientes que realizou venda com esse tipo de pagamento
+CREATE OR REPLACE FUNCTION retorna_valor_pagamento(p_descricao IN VARCHAR2) RETURN INT
+IS
+    c_quant INT;
+BEGIN
+    SELECT 
