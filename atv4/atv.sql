@@ -202,10 +202,11 @@ CREATE OR REPLACE FUNCTION retorna_ultimavenda(p_descricao IN VARCHAR2) RETURN D
 IS
     dt_ultima DATE;
 BEGIN 
-    SELECT MAX(i.dtvenda)
+    SELECT MAX(i.dtvenda) INTO dt_ultima
     FROM XITENSVENDA i, XPRODUTO p
     WHERE i.codproduto = p.codproduto
     AND p.descricaoproduto = p_descricao;
 RETURN  dt_ultima;
+END;
 
-SELECT retorna_ultimavenda('Coca Cola') FROM dual;
+SELECT retorna_ultimavenda('Sabonete Palmolive') FROM dual;
