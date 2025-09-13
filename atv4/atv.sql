@@ -220,7 +220,9 @@ IS
     min_value FLOAT;
 BEGIN
     SELECT MIN(v.vlvenda) INTO min_value
-    FROM XVENDA v
-RETURN min_value;
-END;
-SELECT retorna_menorvenda FROM dual;
+    FROM XVENDA v;
+    RETURN min_value;
+END retorna_menorvenda;
+
+SELECT retorna_menorvenda() FROM dual;
+
