@@ -210,3 +210,8 @@ RETURN  dt_ultima;
 END;
 
 SELECT retorna_ultimavenda('Sabonete Palmolive') FROM dual;
+
+
+
+
+--10 Criar a função retorna_menorvenda que retorna o menor valor de venda realizada.
