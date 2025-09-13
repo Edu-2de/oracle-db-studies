@@ -140,17 +140,22 @@ SELECT retorna_mediageral FROM dual;
 
 
 --7 Criar a função retorna_novo_preco, que recebe como parâmetro a descrição do produto e mediante a quantidade vendida retorna o novo preço do produto, conforme a tabela abaixo: Qtd vendida % Aumento 1 5 2 7 3 8 4 9 maior ou igual a 5 12
-CREATE OR REPLACE FUNCTION retorna_novo_preco (p_descricao IN VARCHAR2) RETURN VARCHAR2
+CREATE OR REPLACE FUNCTION retorna_novo_preco(p_descricao IN VARCHAR2) RETURN FLOAT
 IS
     it_qtdesvendidas FLOAT;
     v_preco FLOAT;
     p_novopreco FLOAT;
 BEGIN
-    SELECT NVL(SUM(i.qtde), 0), p.preco
-    INTO it_qtdesvendidas, v_preco
+    SELECT NVL(SUM(i.qtde), 0)
+    INTO it_qtdesvendidas
     FROM XITENSVENDA i, XPRODUTO p
     WHERE i.codproduto = p.codproduto
       AND p.descricaoproduto = p_descricao;
+
+    SELECT preco
+    INTO v_preco
+    FROM XPRODUTO
+    WHERE descricaoproduto = p_descricao;
 
     IF it_qtdesvendidas = 1 THEN
         p_novopreco := v_preco + (v_preco * 0.05);
@@ -166,7 +171,12 @@ BEGIN
         p_novopreco := v_preco; 
     END IF;
 
-    RETURN 'O novo preco do produto é: ' || TO_CHAR(p_novopreco, 'FM9999990.00');
+    RETURN p_novopreco;
 END;
 
 SELECT retorna_novo_preco('Coca Cola') FROM dual;
+
+
+
+
+--8 Criar a função retorna_valor_pagamento que recebe como parâmetro a descrição do tipo de pagamento e retorna a quantidade de clientes que realizou venda com esse tipo de pagamento
