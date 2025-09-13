@@ -184,10 +184,13 @@ CREATE OR REPLACE FUNCTION retorna_valor_pagamento(p_descricao IN VARCHAR2) RETU
 IS
     c_quant INT;
 BEGIN
-    SELECT  SELECT NVL(SUM(v.codtppagamento), 0)
+    SELECT NVL(COUNT(v.codtppagamento), 0)
     INTO c_quant
     FROM XVENDA v, XTIPOSPAGAMENTO t
     WHERE v.codtppagamento = t.codtppagamento
         AND t.descricaotppagamento = p_descricao;
     RETURN c_quant;
 END;
+
+SELECT retorna_valor_pagamento('Creditário') FROM dual;
+
